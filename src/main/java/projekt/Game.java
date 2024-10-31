@@ -13,7 +13,7 @@ public class Game {
 
   /**.
    *
-   * @param args - optional arg 
+   * @param args - unused 
    */
   public static void main(String[] args) {
 

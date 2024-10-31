@@ -3,7 +3,7 @@ package projekt;
 import java.awt.Point;
 
 /**.
- * da
+ * 
  */
 public class PlainGameOfLifeSimulator implements GameOfLifeSimulator {
   /**.
