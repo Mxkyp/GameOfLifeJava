@@ -12,18 +12,26 @@ public class PlainGameOfLifeSimulator implements GameOfLifeSimulator {
   */
   @Override
   public void doStep(GameOfLifeBoard board) {
-    boolean [][] newBoard = board.getBoard();
-    final int rows = newBoard.length;
-    final int cols = newBoard[0].length;
+    final int rows = board.getBoard().length;
+    final int cols = board.getBoard()[0].length;
+
+    GameOfLifeCell[][] newBoard = new GameOfLifeCell[rows][cols];
+    for(int i = 0; i < rows; i++) {
+      for(int j = 0; j < cols; j++) {
+        newBoard[i][j] = new GameOfLifeCell();
+      }
+    }
+    
+    newBoard = board.getBoard();
     
     for (int r = 0; r < rows; r++) {
 
       for (int c = 0; c < cols; c++) {
         Point cell = new Point(c, r);
-        if (checkIfCellLives(board.getBoard(), cell)) {
-          newBoard[cell.y][cell.x] = true; // the cell is alive
+        if (checkIfCellLives(board, cell)) {
+          newBoard[cell.y][cell.x].updateState(true); ; // the cell is alive
         } else {
-          newBoard[cell.y][cell.x] = false; // the cell is dead
+          newBoard[cell.y][cell.x].updateState(false);; // the cell is dead
         }
       }
     }
@@ -38,12 +46,12 @@ public class PlainGameOfLifeSimulator implements GameOfLifeSimulator {
    * @param cell - the cell to be checked
    * @return - the update state of the cell - alive(true) or dead(false)
    */
-  public static boolean checkIfCellLives(boolean[][] board, Point cell) {
+  public static boolean checkIfCellLives(GameOfLifeBoard board, Point cell) {
     int aliveNeighbours = 0;
     
     aliveNeighbours = checkNeighbours(board, cell);
    
-    boolean cellLives = board[cell.y][cell.x];
+    boolean cellLives = board.getBoard()[cell.y][cell.x].getCellState();
     if (!cellLives && (aliveNeighbours == 3)) {
       cellLives = true;
     } else if (cellLives && (aliveNeighbours > 1) && aliveNeighbours < 4) {
@@ -62,24 +70,14 @@ public class PlainGameOfLifeSimulator implements GameOfLifeSimulator {
    * @param cell - a point in the board which neighbours will be checked
    * @return - the number of alive neighbours
    */
-  public static int checkNeighbours(boolean[][] board, Point cell) {
-    final int rows = board.length;
-    final int cols = board[0].length;
+  public static int checkNeighbours(GameOfLifeBoard board, Point cell) {
     int aliveNeighbours = 0;
 
     //we check the neighbours starting from upperleft relative position (-1, -1)
-    for (int r = -1; r <= 1; r++) {
-
-      int y = (cell.y + r + rows) % rows;
-
-      for (int c = -1; c <= 1; c++) {
-
-        int x = (cell.x + c + cols) % cols;
-        Point neighbour = new Point(x, y);
-        
-        if (board[neighbour.y][neighbour.x] && !neighbour.equals(cell)) {
-          aliveNeighbours++;
-        }
+    for(int i = 0; i < 8 ; i++) {
+      boolean neighbourIsAlive = board.getNeighboursValues(cell.y, cell.x, i); 
+      if(neighbourIsAlive) {
+        aliveNeighbours++;
       }
     }
     return aliveNeighbours;

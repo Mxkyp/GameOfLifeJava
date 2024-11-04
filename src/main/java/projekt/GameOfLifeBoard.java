@@ -57,6 +57,12 @@ public class GameOfLifeBoard {
       }
     }
 
+    for (int i = 0; i < def; i++) {
+      
+      for (int j = 0; j < def; j++) {
+        this.assignNeighboursTo(i, j);
+      }
+    }
   }
   
   /**.
@@ -67,8 +73,8 @@ public class GameOfLifeBoard {
   private void assignNeighboursTo(int y_index, int x_index) {
     final int rows = this.board.length;
     final int cols = this.board[0].length;
-   GameOfLifeCell[] neighbours = new GameOfLifeCell[8];
-   int counter = 0;
+    GameOfLifeCell[] neighbours = new GameOfLifeCell[8];
+    int counter = 0;
     for (int r = -1; r <= 1; r++) {
 
       int y = (y_index + r + rows) % rows;
@@ -88,7 +94,7 @@ public class GameOfLifeBoard {
     this.board[y_index][x_index].setNeighbours(neighbours);
   }
 
-  public boolean returnNeighboursValues(int y_index, int x_index, int n) {
+  public boolean getNeighboursValues(int y_index, int x_index, int n) {
     return this.board[y_index][x_index].getNeighbourState(n);
   }
 
@@ -135,6 +141,21 @@ public class GameOfLifeBoard {
     }
   }
 
+  public void setBoard(GameOfLifeCell[][] templateBoard) {
+    final int row = templateBoard.length;
+    final int col = templateBoard[0].length;
+
+    boolean[][] independentCopy = new boolean[row][];
+    
+    
+    for (int i = 0; i < row; i++) {
+
+      for (int j = 0; j < col; j++) {
+        boolean copied =  templateBoard[i][j].getCellState();
+        this.board[i][j].updateState(copied);
+      }
+    }
+  }
 
   /**.
    * prints the given board
