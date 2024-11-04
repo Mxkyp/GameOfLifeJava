@@ -36,8 +36,9 @@ public class PlainGameOfLifeSimulatorTest {
     }
   }
   
- // @Test
+  @Test
   void testCheckIfCellLives() {
+    GameOfLifeBoard golb = new GameOfLifeBoard(3,3);
     final boolean [][]board = { {false, true, false},
                                 {true,  false,  false},
                                 {false, true,  false}};
@@ -78,27 +79,40 @@ public class PlainGameOfLifeSimulatorTest {
                                   {true,  true, false },
                                   {false, false,  true}};
     Point leftUpper = new Point(0, 0); 
-    
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board2, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board3, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board4, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board5, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board6, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board7, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board8, leftUpper));
-    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(board9, leftUpper));
-    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(board10, leftUpper));
-    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(board11, leftUpper));
-    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(board12, leftUpper));
-    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(board13, leftUpper));
+
+    golb.setBoard(board);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board2);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board3);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board4);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board5);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board6);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board7);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board8);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board9);
+    assertTrue(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board10);
+    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board11);
+    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board12);
+    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
+    golb.setBoard(board13);
+    assertFalse(PlainGameOfLifeSimulator.checkIfCellLives(golb, leftUpper));
   }
 
 
-  //@Test
+  @Test
     void testCheckNeighbours() {
     //Given 
-    
+    GameOfLifeBoard golb = new GameOfLifeBoard(3,3);
     //When
     boolean [][]b1 = { {false, false, false},
                        {false,  false,  true},
@@ -121,14 +135,20 @@ public class PlainGameOfLifeSimulatorTest {
     Point middleMiddle = new Point(2, 1);
 
     //then aN == aliveNeighbours, u - left upper, m - right middle mM - middle middle
-    final int aNu1 = PlainGameOfLifeSimulator.checkNeighbours(b1, leftUpper);
-    final int aNu2 = PlainGameOfLifeSimulator.checkNeighbours(b2, leftUpper);
-    final int aNu3 = PlainGameOfLifeSimulator.checkNeighbours(b3, leftUpper);
-    
-    final int aNm1 = PlainGameOfLifeSimulator.checkNeighbours(b1, rightMiddle);
-    final int aNm2 = PlainGameOfLifeSimulator.checkNeighbours(b2, rightMiddle);
-    final int aNm3 = PlainGameOfLifeSimulator.checkNeighbours(b3, rightMiddle);
-    final int aNmM4 = PlainGameOfLifeSimulator.checkNeighbours(b4, middleMiddle);
+    golb.setBoard(b1);
+    final int aNu1 = PlainGameOfLifeSimulator.checkNeighbours(golb, leftUpper);
+    final int aNm1 = PlainGameOfLifeSimulator.checkNeighbours(golb, rightMiddle);
+
+    golb.setBoard(b2);
+    final int aNu2 = PlainGameOfLifeSimulator.checkNeighbours(golb, leftUpper);
+    final int aNm2 = PlainGameOfLifeSimulator.checkNeighbours(golb, rightMiddle);
+
+    golb.setBoard(b3);
+    final int aNu3 = PlainGameOfLifeSimulator.checkNeighbours(golb, leftUpper);
+    final int aNm3 = PlainGameOfLifeSimulator.checkNeighbours(golb, rightMiddle);
+
+    golb.setBoard(b4);
+    final int aNmM4 = PlainGameOfLifeSimulator.checkNeighbours(golb, middleMiddle);
     
     assertEquals(2, aNu1); 
     assertEquals(3, aNu2); 

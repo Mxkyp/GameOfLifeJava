@@ -16,8 +16,8 @@ public class PlainGameOfLifeSimulator implements GameOfLifeSimulator {
     final int cols = board.getBoard()[0].length;
 
     GameOfLifeCell[][] newBoard = new GameOfLifeCell[rows][cols];
-    for(int i = 0; i < rows; i++) {
-      for(int j = 0; j < cols; j++) {
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
         newBoard[i][j] = new GameOfLifeCell();
       }
     }
@@ -74,9 +74,9 @@ public class PlainGameOfLifeSimulator implements GameOfLifeSimulator {
     int aliveNeighbours = 0;
 
     //we check the neighbours starting from upperleft relative position (-1, -1)
-    for(int i = 0; i < 8 ; i++) {
+    for (int i = 0; i < 8; i++) {
       boolean neighbourIsAlive = board.getNeighboursValues(cell.y, cell.x, i); 
-      if(neighbourIsAlive) {
+      if (neighbourIsAlive) {
         aliveNeighbours++;
       }
     }
