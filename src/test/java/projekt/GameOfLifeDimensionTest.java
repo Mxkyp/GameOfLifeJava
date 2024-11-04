@@ -27,15 +27,15 @@ public class GameOfLifeDimensionTest {
       }
     }
 
-    GameOfLifeDimension row0 = new GameOfLifeRow(board, 0);
+    GameOfLifeRow row0 = new GameOfLifeRow(board, 0);
     assertEquals(1, row0.countAliveCells());
     assertEquals(2, row0.countDeadCells());
 
-    GameOfLifeDimension row1 = new GameOfLifeRow(board, 1);
+    GameOfLifeRow row1 = new GameOfLifeRow(board, 1);
     assertEquals(1, row1.countAliveCells());
     assertEquals(2, row1.countDeadCells());
 
-    GameOfLifeDimension row3 = new GameOfLifeRow(board, 3);
+    GameOfLifeRow row3 = new GameOfLifeRow(board, 3);
     assertEquals(2, row3.countAliveCells());
     assertEquals(1, row3.countDeadCells());
   }
@@ -59,15 +59,15 @@ public class GameOfLifeDimensionTest {
       }
     }
 
-    GameOfLifeDimension col0 = new GameOfLifeColumn(board, 0);
+    GameOfLifeColumn col0 = new GameOfLifeColumn(board, 0);
     assertEquals(1, col0.countAliveCells());
     assertEquals(3, col0.countDeadCells());
 
-    GameOfLifeDimension col1 = new GameOfLifeColumn(board, 1);
+    GameOfLifeColumn col1 = new GameOfLifeColumn(board, 1);
     assertEquals(2, col1.countAliveCells());
     assertEquals(2, col1.countDeadCells());
 
-    GameOfLifeDimension col2 = new GameOfLifeColumn(board, 2);
+    GameOfLifeColumn col2 = new GameOfLifeColumn(board, 2);
     assertEquals(1, col2.countAliveCells());
     assertEquals(3, col2.countDeadCells());
   }

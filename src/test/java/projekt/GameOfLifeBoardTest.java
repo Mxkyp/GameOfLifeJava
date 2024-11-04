@@ -123,7 +123,7 @@ class GameOfLifeBoardTest {
   }
 
 
-  //@Test 
+  @Test 
   void testDoSimulationStep() {
     final boolean [][]before = { {false, true, false },
                                  {false,  true, false },
@@ -140,10 +140,39 @@ class GameOfLifeBoardTest {
     
     for (int i = 0; i < expectedAfter.length; i++) {
       for (int j = 0; j < expectedAfter[0].length; j++) {
-        assertEquals(expectedAfter[i][j], golb1.getBoard()[i][j]);
+        assertEquals(expectedAfter[i][j], golb1.getBoard()[i][j].getCellState());
       }
     }
   }
   
+  @Test
+  public void testGetRow() {
+    final boolean [][]given = { {true, true, false },
+                                {true,  true, false },
+                                {false, false, false},
+                                {true, false,  true}}; 
+
+    GameOfLifeBoard golb1 = new GameOfLifeBoard(4, 3);
+    golb1.setBoard(given);
+    
+    GameOfLifeRow row = golb1.getRow(0);
+    assertEquals(2, row.countAliveCells());
+    assertEquals(1, row.countDeadCells());
+  }
+
+  @Test
+  public void testGetCol() {
+    final boolean [][]given = { {true, true, false },
+                                {true,  true, false },
+                                {true, false, false},
+                                {true, false,  true}}; 
+
+    GameOfLifeBoard golb1 = new GameOfLifeBoard(4, 3);
+    golb1.setBoard(given);
+    
+    GameOfLifeColumn col = golb1.getColumn(0);
+    assertEquals(4, col.countAliveCells());
+    assertEquals(0, col.countDeadCells());
+  }
 }
   

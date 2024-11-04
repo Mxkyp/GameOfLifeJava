@@ -183,4 +183,14 @@ public class GameOfLifeBoard {
     }
   }
   
+  public GameOfLifeRow getRow(int y) {
+    GameOfLifeRow row = new GameOfLifeRow(this.board, y);
+    return row;
+  }
+
+  public GameOfLifeColumn getColumn(int x) {
+    GameOfLifeColumn column = new GameOfLifeColumn(this.board, x);
+    return column;
+  }
+  
 }
