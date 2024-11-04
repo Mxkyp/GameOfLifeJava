@@ -7,7 +7,7 @@ import java.util.Random;
  * 
  */
 public class GameOfLifeBoard {
-  private boolean[][] board;
+  private GameOfLifeCell[][] board;
   
   public void doSimulationStep() {
     GameOfLifeSimulator gameOfLifeSimulator = new PlainGameOfLifeSimulator();
@@ -23,12 +23,13 @@ public class GameOfLifeBoard {
   public GameOfLifeBoard(int n, int m) {
     Random r = new Random();
 
-    this.board = new boolean[n][m];
+    this.board = new GameOfLifeCell[n][m];
     
     for (int i = 0; i < n; i++) {
       
       for (int j = 0; j < m; j++) {
-        this.board[i][j] = r.nextBoolean();
+        this.board[i][j] = new GameOfLifeCell();
+        this.board[i][j].updateState(r.nextBoolean()); ;
       }
     }
   }
@@ -39,12 +40,13 @@ public class GameOfLifeBoard {
   public GameOfLifeBoard() {
     Random r = new Random();
     final int def = 10;
-    this.board = new boolean[def][def];
+    this.board = new GameOfLifeCell[def][def];
     
     for (int i = 0; i < def; i++) {
       
       for (int j = 0; j < def; j++) {
-        this.board[i][j] = r.nextBoolean();
+        this.board[i][j] = new GameOfLifeCell();
+        this.board[i][j].updateState(r.nextBoolean()); ;
       }
     }
 
@@ -54,11 +56,16 @@ public class GameOfLifeBoard {
   *
   * @return a hardcopy of the board member of a given instance
   */
-  public boolean[][] getBoard() {
-    boolean[][] independentCopy = new boolean[this.board.length][];
+  public GameOfLifeCell[][] getBoard() {
+    final int rows = this.board.length;
+    final int cols = this.board[0].length;
+    GameOfLifeCell[][] independentCopy = new GameOfLifeCell[rows][cols];
     
-    for (int i = 0; i < this.board.length; i++) {
-      independentCopy[i] = Arrays.copyOf(board[i], board[i].length);
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < cols; j++) {
+        independentCopy[i][j] = new GameOfLifeCell();
+        independentCopy[i][j].updateState(this.board[i][j].getCellState()); 
+      }
     }
     
     return independentCopy;
@@ -77,7 +84,7 @@ public class GameOfLifeBoard {
       independentCopy[i] = Arrays.copyOf(templateBoard[i], templateBoard[i].length);
     }
     
-    this.board = independentCopy;
+   // this.board = independentCopy;
   }
 
 
@@ -92,10 +99,10 @@ public class GameOfLifeBoard {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[0].length; j++) {
         char toPlace = '0';
-        if (board[i][j] == true) {
+     // if (board[i][j] == true) {
           toPlace = '1';
-        }
-        System.out.printf("%c ", toPlace);
+      //  }
+     //   System.out.printf("%c ", toPlace);
       }
       System.out.print('\n');
     }
