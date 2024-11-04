@@ -58,8 +58,9 @@ class GameOfLifeBoardTest {
   @Test
   void testGetBoard() {
     GameOfLifeBoard golb1 = new GameOfLifeBoard(5, 5);
-    boolean[][] copyBoard = golb1.getBoard();
-    copyBoard[0][0] = !copyBoard[0][0];
+    GameOfLifeCell[][] copyBoard = golb1.getBoard();
+    boolean zeroZeroState = copyBoard[0][0].getCellState();
+    copyBoard[0][0].updateState(!zeroZeroState); // negate the state of the cell at 0,0 coordinates
     
     assertNotEquals(copyBoard[0][0], golb1.getBoard()[0][0], "The change in "  
         + "copyBoard should not be a change in the orignal board");
@@ -76,6 +77,13 @@ class GameOfLifeBoardTest {
     toImport[0][0] = true;
     assertNotEquals(golb1.getBoard()[0][0], toImport[0][0], "The change in "  
         + "toImport should not be a change in the orignal board");
+    toImport[0][0] = false;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        assertEquals(golb1.getBoard()[i][j].getCellState(), toImport[i][j], "The board "  
+            + "should exactly match the imported one");
+      }
+    }
   }
   
   @Test 

@@ -72,19 +72,27 @@ public class GameOfLifeBoard {
   }
 
   /**.
-   * creates a hardcopy of a given board,
+   * creates a hardcopy of a example cells state board
    * and assign it to the board member
    *
    * @param templateBoard -
    */
   public void setBoard(boolean[][] templateBoard) {
-    boolean[][] independentCopy = new boolean[templateBoard.length][];
+    final int row = templateBoard.length;
+    final int col = templateBoard[0].length;
+
+    boolean[][] independentCopy = new boolean[row][];
     
-    for (int i = 0; i < templateBoard.length; i++) {
-      independentCopy[i] = Arrays.copyOf(templateBoard[i], templateBoard[i].length);
+    for (int i = 0; i < row; i++) {
+      independentCopy[i] = Arrays.copyOf(templateBoard[i], col);
     }
     
-   // this.board = independentCopy;
+    for (int i = 0; i < row; i++) {
+
+      for (int j = 0; j < col; j++) {
+        this.board[i][j].updateState(independentCopy[i][j]);
+      }
+    }
   }
 
 
@@ -99,10 +107,11 @@ public class GameOfLifeBoard {
     for (int i = 0; i < board.length; i++) {
       for (int j = 0; j < board[0].length; j++) {
         char toPlace = '0';
-     // if (board[i][j] == true) {
+        boolean isAlive = this.board[i][j].getCellState();
+      if (isAlive) {
           toPlace = '1';
-      //  }
-     //   System.out.printf("%c ", toPlace);
+        }
+        System.out.printf("%c ", toPlace);
       }
       System.out.print('\n');
     }
