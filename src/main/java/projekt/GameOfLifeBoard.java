@@ -32,6 +32,13 @@ public class GameOfLifeBoard {
         this.board[i][j].updateState(r.nextBoolean()); ;
       }
     }
+
+    for (int i = 0; i < n; i++) {
+      
+      for (int j = 0; j < m; j++) {
+        this.assignNeighboursTo(i, j);
+      }
+    }
   }
 
   /**.
@@ -50,6 +57,39 @@ public class GameOfLifeBoard {
       }
     }
 
+  }
+  
+  /**.
+   * assign 8 neighbours to the cell at y = y_index, x = x_index 
+   * @param y_index - y position in the board
+   * @param x_index - x position in the board
+   */
+  private void assignNeighboursTo(int y_index, int x_index) {
+    final int rows = this.board.length;
+    final int cols = this.board[0].length;
+   GameOfLifeCell[] neighbours = new GameOfLifeCell[8];
+   int counter = 0;
+    for (int r = -1; r <= 1; r++) {
+
+      int y = (y_index + r + rows) % rows;
+
+      for (int c = -1; c <= 1; c++) {
+
+        int x = (x_index + c + cols) % cols;
+        
+        if (y != y_index || x != x_index) {
+          neighbours[counter] = new GameOfLifeCell();
+          neighbours[counter] = this.board[y][x];
+          counter++;
+        }
+      }
+    }
+    
+    this.board[y_index][x_index].setNeighbours(neighbours);
+  }
+
+  public boolean returnNeighboursValues(int y_index, int x_index, int n) {
+    return this.board[y_index][x_index].getNeighbourState(n);
   }
 
   /**.
@@ -108,7 +148,7 @@ public class GameOfLifeBoard {
       for (int j = 0; j < board[0].length; j++) {
         char toPlace = '0';
         boolean isAlive = this.board[i][j].getCellState();
-      if (isAlive) {
+        if (isAlive) {
           toPlace = '1';
         }
         System.out.printf("%c ", toPlace);
