@@ -63,16 +63,17 @@ class GameOfLifeBoardTest {
                                    {true, false,  true}}; 
     golb1.setBoard(toImport);
    
-    assertEquals(true, golb1.returnNeighboursValues(0, 0, 0));
-    assertEquals(true, golb1.returnNeighboursValues(0, 0, 1));
-    assertEquals(false, golb1.returnNeighboursValues(0, 0, 2));
-    assertEquals(false, golb1.returnNeighboursValues(0, 0, 3));
-    assertEquals(false, golb1.returnNeighboursValues(0, 0, 4));
-    assertEquals(false, golb1.returnNeighboursValues(0, 0, 4));
-    assertEquals(false, golb1.returnNeighboursValues(0, 0, 5));
-    assertEquals(false, golb1.returnNeighboursValues(0, 0, 6));
-    assertEquals(true, golb1.returnNeighboursValues(0, 0, 7));
+    assertEquals(true, golb1.getNeighboursValues(0, 0, 0));
+    assertEquals(true, golb1.getNeighboursValues(0, 0, 1));
+    assertEquals(false, golb1.getNeighboursValues(0, 0, 2));
+    assertEquals(false, golb1.getNeighboursValues(0, 0, 3));
+    assertEquals(false, golb1.getNeighboursValues(0, 0, 4));
+    assertEquals(false, golb1.getNeighboursValues(0, 0, 4));
+    assertEquals(false, golb1.getNeighboursValues(0, 0, 5));
+    assertEquals(false, golb1.getNeighboursValues(0, 0, 6));
+    assertEquals(true, golb1.getNeighboursValues(0, 0, 7));
   }
+
   @Test
   void testGetBoard() {
     GameOfLifeBoard golb1 = new GameOfLifeBoard(5, 5);

@@ -66,24 +66,25 @@ public class GameOfLifeBoard {
   }
   
   /**.
-   * assign 8 neighbours to the cell at y = y_index, x = x_index 
+   * assign 8 neighbours to the cell
+   *
    * @param y_index - y position in the board
    * @param x_index - x position in the board
    */
-  private void assignNeighboursTo(int y_index, int x_index) {
+  private void assignNeighboursTo(int cellY, int cellX) {
     final int rows = this.board.length;
     final int cols = this.board[0].length;
     GameOfLifeCell[] neighbours = new GameOfLifeCell[8];
     int counter = 0;
     for (int r = -1; r <= 1; r++) {
 
-      int y = (y_index + r + rows) % rows;
+      int y = (cellY + r + rows) % rows;
 
       for (int c = -1; c <= 1; c++) {
 
-        int x = (x_index + c + cols) % cols;
+        int x = (cellX + c + cols) % cols;
         
-        if (y != y_index || x != x_index) {
+        if (y != cellY || x != cellX) {
           neighbours[counter] = new GameOfLifeCell();
           neighbours[counter] = this.board[y][x];
           counter++;
@@ -91,11 +92,11 @@ public class GameOfLifeBoard {
       }
     }
     
-    this.board[y_index][x_index].setNeighbours(neighbours);
+    this.board[cellY][cellX].setNeighbours(neighbours);
   }
 
-  public boolean getNeighboursValues(int y_index, int x_index, int n) {
-    return this.board[y_index][x_index].getNeighbourState(n);
+  public boolean getNeighboursValues(int cellY, int cellX, int neighIndex) {
+    return this.board[cellY][cellX].getNeighbourState(neighIndex);
   }
 
   /**.
@@ -141,6 +142,10 @@ public class GameOfLifeBoard {
     }
   }
 
+  /**.
+   *
+   * @param templateBoard - an golb to be copied
+   */
   public void setBoard(GameOfLifeCell[][] templateBoard) {
     final int row = templateBoard.length;
     final int col = templateBoard[0].length;

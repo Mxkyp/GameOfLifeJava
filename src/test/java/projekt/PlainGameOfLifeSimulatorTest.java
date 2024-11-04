@@ -38,7 +38,7 @@ public class PlainGameOfLifeSimulatorTest {
   
   @Test
   void testCheckIfCellLives() {
-    GameOfLifeBoard golb = new GameOfLifeBoard(3,3);
+    GameOfLifeBoard golb = new GameOfLifeBoard(3, 3);
     final boolean [][]board = { {false, true, false},
                                 {true,  false,  false},
                                 {false, true,  false}};
@@ -112,7 +112,7 @@ public class PlainGameOfLifeSimulatorTest {
   @Test
     void testCheckNeighbours() {
     //Given 
-    GameOfLifeBoard golb = new GameOfLifeBoard(3,3);
+    GameOfLifeBoard golb = new GameOfLifeBoard(3, 3);
     //When
     boolean [][]b1 = { {false, false, false},
                        {false,  false,  true},
